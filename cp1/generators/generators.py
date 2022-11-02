@@ -13,7 +13,7 @@ def gen_initial(N):
 
     return result
 
-def lemer_low(N):
+def lehmer_low(N):
     m = 1 << 32
     a = (1 << 16) + 1
     c = 119
@@ -28,7 +28,7 @@ def lemer_low(N):
 
     return result
 
-def lemer_high(N):
+def lehmer_high(N):
     m = 1 << 32
     a = (1 << 16) + 1
     c = 119
