@@ -18,9 +18,7 @@ def equal_distribution(dist, alpha):
 
     countMap = {}
     for item in dist_list:
-        if not (item in countMap):
-            countMap[item] = 0
-        countMap[item] += 1
+        countMap[item] = countMap.get(item, 0) + 1
 
     chiSquare = 0
 
@@ -62,8 +60,7 @@ def homogeneity(dist, alpha):
         chiTmp, s, k = chi2sum(sub_list)
         chiSquare += (chiTmp - 1)
 
-
-    chiSquare = chiSquare * n
+    chiSquare *= n
 
     q = scipy.stats.chi2.ppf(1 - alpha, (s - 1) * (k - 1)*r)
     print("empiric: " + str(chiSquare) + ", theoretic: " + str(q))
@@ -78,22 +75,15 @@ def chi2sum(dist):
     for i in range(0, len(dist) - 1, 2):
         item = dist[i]
         itemNext = dist[(i + 1)]
-        if not (item in countMapFirst):
-            countMapFirst[item] = 0
-        countMapFirst[item] += 1
 
-        if not (itemNext in countMapSecond):
-            countMapSecond[itemNext] = 0
-        countMapSecond[itemNext] += 1
-
-        if not ((item, itemNext) in countMapDouble):
-            countMapDouble[(item, itemNext)] = 0
-        countMapDouble[(item, itemNext)] += 1
+        countMapFirst[item] = countMapFirst.get(item, 0) + 1
+        countMapSecond[itemNext] = countMapSecond.get(itemNext, 0) + 1
+        countMapDouble[(item, itemNext)] = countMapDouble.get((item, itemNext), 0) + 1
 
     chiSquare = 0
 
     for double in countMapDouble.keys():
         item, itemNext = double
-
         chiSquare += (countMapDouble[double] ** 2 / (countMapFirst[item] * countMapSecond[itemNext]))
+
     return chiSquare, len(countMapFirst), len(countMapSecond)
