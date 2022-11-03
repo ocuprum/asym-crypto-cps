@@ -4,11 +4,14 @@ import scipy.stats
 def test(seq, name, quantile):
     print("Testing `" + name + "` RNG, with quantile:", quantile)
     print("Equal Distribution:")
-    print("result:", equal_distribution(seq, quantile))
+    res, empiric, theoretic = equal_distribution(seq, quantile)
+    print("result:", res, "with empiric:", empiric, "and theoretic:", theoretic, "quantiles")
     print("Independence:")
-    print("result:", independence(seq, quantile))
+    res, empiric, theoretic = independence(seq, quantile)
+    print("result:", res, "with empiric:", empiric, "and theoretic:", theoretic, "quantiles")
     print("Homogeneity:")
-    print("result:", homogeneity(seq, quantile))
+    res, empiric, theoretic = homogeneity(seq, quantile)
+    print("result:", res, "with empiric:", empiric, "and theoretic:", theoretic, "quantiles")
     print("\n")
 
 
@@ -28,8 +31,7 @@ def equal_distribution(dist, alpha):
 
     q = scipy.stats.chi2.ppf(1 - alpha, df=(n - 1))
 
-    print("empiric: " + str(chi_square) + ", theoretic: " + str(q))
-    return chi_square < q
+    return chi_square < q, chi_square, q
 
 
 def independence(dist, alpha):
@@ -41,8 +43,7 @@ def independence(dist, alpha):
 
     q = scipy.stats.chi2.ppf(1 - alpha, (s - 1) * (k - 1))
 
-    print("empiric: " + str(chi_square) + ", theoretic: " + str(q))
-    return chi_square < q
+    return chi_square < q, chi_square, q
 
 
 def homogeneity(dist, alpha):
@@ -62,10 +63,9 @@ def homogeneity(dist, alpha):
         chi_square += (chi_tmp - 1)
 
     chi_square *= n
-
     q = scipy.stats.chi2.ppf(1 - alpha, (s - 1) * (k - 1) * r)
-    print("empiric: " + str(chi_square) + ", theoretic: " + str(q))
-    return chi_square < q
+
+    return chi_square < q, chi_square, q
 
 
 def chi2sum(dist):

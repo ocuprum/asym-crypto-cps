@@ -1,6 +1,6 @@
 import time
 import generators.generators as gen
-import t.tests as t
+import tests.tests as t
 
 quantiles = [0.1, 0.05, 0.01]
 seq1 = gen.built_in(1000000)
