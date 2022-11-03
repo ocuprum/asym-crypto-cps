@@ -7,7 +7,8 @@ def test(seq, name, quantile):
     print("result:", equal_distribution(seq, quantile))
     print("Independence:")
     print("result:", independence(seq, quantile))
-    print("Homogeneity:", homogeneity(seq, quantile))
+    print("Homogeneity:")
+    print("result:", homogeneity(seq, quantile))
     print("\n")
 
 def equal_distribution(dist, alpha):

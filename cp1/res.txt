@@ -1,0 +1,396 @@
+Testing `build_in` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 262.95040000000023, theoretic: 527.6924813620954
+result: True
+Independence:
+empiric: 64701.29981497843, theoretic: 65487.58497309152
+result: True
+empiric: 649171.6455009561, theoretic: 651711.9021533933
+Homogeneity: True
+
+
+Testing `lehmer_low` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 0.1059839999999993, theoretic: 527.6924813620954
+result: True
+Independence:
+empiric: 7937500.0, theoretic: 16359.59722669597
+result: False
+empiric: 7937500.0, theoretic: 162018.29855625622
+Homogeneity: False
+
+
+Testing `lehmer_high` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 62608.551168000005, theoretic: 527.6924813620954
+result: False
+Independence:
+empiric: 15967.440595251264, theoretic: 16359.59722669597
+result: True
+empiric: 160836.56559552293, theoretic: 162018.29855625622
+Homogeneity: True
+
+
+Testing `l20` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 242.86361600000012, theoretic: 527.6924813620954
+result: True
+Independence:
+empiric: 61239.9222474254, theoretic: 65487.58497309152
+result: True
+empiric: 646386.4925489912, theoretic: 651711.9021533933
+Homogeneity: True
+
+
+Testing `l89` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 246.20595200000022, theoretic: 527.6924813620954
+result: True
+Independence:
+empiric: 65180.05557203649, theoretic: 65487.58497309152
+result: True
+empiric: 651380.5685679741, theoretic: 651711.9021533933
+Homogeneity: True
+
+
+Testing `geffe` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 305.0654720000001, theoretic: 527.6924813620954
+result: True
+Independence:
+empiric: 71976.79863672458, theoretic: 65487.58497309152
+result: False
+empiric: 657863.2060420311, theoretic: 651711.9021533933
+Homogeneity: False
+
+
+Testing `wolfram` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 257.6624640000004, theoretic: 527.6924813620954
+result: True
+Independence:
+empiric: 68996.98476487958, theoretic: 65487.58497309152
+result: False
+empiric: 648973.1573973586, theoretic: 651711.9021533933
+Homogeneity: True
+
+
+Testing `librarian` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 2004047.072708, theoretic: 527.6924813620954
+result: False
+Independence:
+empiric: 273432.82923226955, theoretic: 4211.398461928273
+result: False
+empiric: 302676.0964345334, theoretic: 29459.860750575008
+Homogeneity: False
+
+
+Testing `bbs` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 221.6258560000002, theoretic: 527.6924813620954
+result: True
+Independence:
+empiric: 64925.21840524978, theoretic: 65487.58497309152
+result: True
+empiric: 650480.4216727145, theoretic: 651711.9021533933
+Homogeneity: True
+
+
+Testing `bbs_bytes` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 239.56224000000023, theoretic: 527.6924813620954
+result: True
+Independence:
+empiric: 65784.2136197121, theoretic: 65487.58497309152
+result: False
+empiric: 652849.0504421168, theoretic: 651711.9021533933
+Homogeneity: False
+
+
+Testing `bm` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 247.25043200000033, theoretic: 527.6924813620954
+result: True
+Independence:
+empiric: 65586.42725159806, theoretic: 65487.58497309152
+result: False
+empiric: 650925.7548481955, theoretic: 651711.9021533933
+Homogeneity: True
+
+
+Testing `bm_bytes` RNG, with quantile: 0.1
+Equal Distribution:
+empiric: 248.77004800000023, theoretic: 527.6924813620954
+result: True
+Independence:
+empiric: 64903.02067880519, theoretic: 65487.58497309152
+result: True
+empiric: 650624.8913750311, theoretic: 651711.9021533933
+Homogeneity: True
+
+
+Testing `build_in` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 262.95040000000023, theoretic: 539.7419057059872
+result: True
+Independence:
+empiric: 64701.29981497843, theoretic: 65619.30929906295
+result: True
+empiric: 649171.6455009561, theoretic: 652126.9186472232
+Homogeneity: True
+
+
+Testing `lehmer_low` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 0.1059839999999993, theoretic: 539.7419057059872
+result: True
+Independence:
+empiric: 7937500.0, theoretic: 16425.55678849
+result: False
+empiric: 7937500.0, theoretic: 162225.34879513257
+Homogeneity: False
+
+
+Testing `lehmer_high` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 62608.551168000005, theoretic: 539.7419057059872
+result: False
+Independence:
+empiric: 15967.440595251264, theoretic: 16425.55678849
+result: True
+empiric: 160836.56559552293, theoretic: 162225.34879513257
+Homogeneity: True
+
+
+Testing `l20` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 242.86361600000012, theoretic: 539.7419057059872
+result: True
+Independence:
+empiric: 61239.9222474254, theoretic: 65619.30929906295
+result: True
+empiric: 646386.4925489912, theoretic: 652126.9186472232
+Homogeneity: True
+
+
+Testing `l89` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 246.20595200000022, theoretic: 539.7419057059872
+result: True
+Independence:
+empiric: 65180.05557203649, theoretic: 65619.30929906295
+result: True
+empiric: 651380.5685679741, theoretic: 652126.9186472232
+Homogeneity: True
+
+
+Testing `geffe` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 305.0654720000001, theoretic: 539.7419057059872
+result: True
+Independence:
+empiric: 71976.79863672458, theoretic: 65619.30929906295
+result: False
+empiric: 657863.2060420311, theoretic: 652126.9186472232
+Homogeneity: False
+
+
+Testing `wolfram` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 257.6624640000004, theoretic: 539.7419057059872
+result: True
+Independence:
+empiric: 68996.98476487958, theoretic: 65619.30929906295
+result: False
+empiric: 648973.1573973586, theoretic: 652126.9186472232
+Homogeneity: True
+
+
+Testing `librarian` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 2004047.072708, theoretic: 539.7419057059872
+result: False
+Independence:
+empiric: 273432.82923226955, theoretic: 4244.98530792545
+result: False
+empiric: 302676.0964345334, theoretic: 29548.290145641113
+Homogeneity: False
+
+
+Testing `bbs` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 221.6258560000002, theoretic: 539.7419057059872
+result: True
+Independence:
+empiric: 64925.21840524978, theoretic: 65619.30929906295
+result: True
+empiric: 650480.4216727145, theoretic: 652126.9186472232
+Homogeneity: True
+
+
+Testing `bbs_bytes` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 239.56224000000023, theoretic: 539.7419057059872
+result: True
+Independence:
+empiric: 65784.2136197121, theoretic: 65619.30929906295
+result: False
+empiric: 652849.0504421168, theoretic: 652126.9186472232
+Homogeneity: False
+
+
+Testing `bm` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 247.25043200000033, theoretic: 539.7419057059872
+result: True
+Independence:
+empiric: 65586.42725159806, theoretic: 65619.30929906295
+result: True
+empiric: 650925.7548481955, theoretic: 652126.9186472232
+Homogeneity: True
+
+
+Testing `bm_bytes` RNG, with quantile: 0.05
+Equal Distribution:
+empiric: 248.77004800000023, theoretic: 539.7419057059872
+result: True
+Independence:
+empiric: 64903.02067880519, theoretic: 65619.30929906295
+result: True
+empiric: 650624.8913750311, theoretic: 652126.9186472232
+Homogeneity: True
+
+
+Testing `build_in` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 262.95040000000023, theoretic: 562.8321779376461
+result: True
+Independence:
+empiric: 64701.29981497843, theoretic: 65866.87805848294
+result: True
+empiric: 649171.6455009561, theoretic: 652905.89561485
+Homogeneity: True
+
+
+Testing `lehmer_low` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 0.1059839999999993, theoretic: 562.8321779376461
+result: True
+Independence:
+empiric: 7937500.0, theoretic: 16549.762938702337
+result: False
+empiric: 7937500.0, theoretic: 162614.21602120186
+Homogeneity: False
+
+
+Testing `lehmer_high` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 62608.551168000005, theoretic: 562.8321779376461
+result: False
+Independence:
+empiric: 15967.440595251264, theoretic: 16549.762938702337
+result: True
+empiric: 160836.56559552293, theoretic: 162614.21602120186
+Homogeneity: True
+
+
+Testing `l20` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 242.86361600000012, theoretic: 562.8321779376461
+result: True
+Independence:
+empiric: 61239.9222474254, theoretic: 65866.87805848294
+result: True
+empiric: 646386.4925489912, theoretic: 652905.89561485
+Homogeneity: True
+
+
+Testing `l89` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 246.20595200000022, theoretic: 562.8321779376461
+result: True
+Independence:
+empiric: 65180.05557203649, theoretic: 65866.87805848294
+result: True
+empiric: 651380.5685679741, theoretic: 652905.89561485
+Homogeneity: True
+
+
+Testing `geffe` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 305.0654720000001, theoretic: 562.8321779376461
+result: True
+Independence:
+empiric: 71976.79863672458, theoretic: 65866.87805848294
+result: False
+empiric: 657863.2060420311, theoretic: 652905.89561485
+Homogeneity: False
+
+
+Testing `wolfram` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 257.6624640000004, theoretic: 562.8321779376461
+result: True
+Independence:
+empiric: 68996.98476487958, theoretic: 65866.87805848294
+result: False
+empiric: 648973.1573973586, theoretic: 652905.89561485
+Homogeneity: True
+
+
+Testing `librarian` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 2004047.072708, theoretic: 562.8321779376461
+result: False
+Independence:
+empiric: 273432.82923226955, theoretic: 4308.467865579965
+result: False
+empiric: 302676.0964345334, theoretic: 29714.64537956215
+Homogeneity: False
+
+
+Testing `bbs` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 221.6258560000002, theoretic: 562.8321779376461
+result: True
+Independence:
+empiric: 64925.21840524978, theoretic: 65866.87805848294
+result: True
+empiric: 650480.4216727145, theoretic: 652905.89561485
+Homogeneity: True
+
+
+Testing `bbs_bytes` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 239.56224000000023, theoretic: 562.8321779376461
+result: True
+Independence:
+empiric: 65784.2136197121, theoretic: 65866.87805848294
+result: True
+empiric: 652849.0504421168, theoretic: 652905.89561485
+Homogeneity: True
+
+
+Testing `bm` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 247.25043200000033, theoretic: 562.8321779376461
+result: True
+Independence:
+empiric: 65586.42725159806, theoretic: 65866.87805848294
+result: True
+empiric: 650925.7548481955, theoretic: 652905.89561485
+Homogeneity: True
+
+
+Testing `bm_bytes` RNG, with quantile: 0.01
+Equal Distribution:
+empiric: 248.77004800000023, theoretic: 562.8321779376461
+result: True
+Independence:
+empiric: 64903.02067880519, theoretic: 65866.87805848294
+result: True
+empiric: 650624.8913750311, theoretic: 652905.89561485
+Homogeneity: True
+
+
