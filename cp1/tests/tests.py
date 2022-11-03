@@ -11,37 +11,38 @@ def test(seq, name, quantile):
     print("result:", homogeneity(seq, quantile))
     print("\n")
 
+
 def equal_distribution(dist, alpha):
     dist_list = [dist[i:i + 8] for i in range(0, len(dist), 8)]
     m = len(dist_list)
     n = m / 256
 
-    countMap = {}
+    count_map = {}
     for item in dist_list:
-        countMap[item] = countMap.get(item, 0) + 1
+        count_map[item] = count_map.get(item, 0) + 1
 
-    chiSquare = 0
+    chi_square = 0
 
-    for count in countMap.values():
-        chiSquare += ((count - n) ** 2) / n
+    for count in count_map.values():
+        chi_square += ((count - n) ** 2) / n
 
     q = scipy.stats.chi2.ppf(1 - alpha, df=(n - 1))
 
-    print("empiric: " + str(chiSquare) + ", theoretic: " + str(q))
-    return chiSquare < q
+    print("empiric: " + str(chi_square) + ", theoretic: " + str(q))
+    return chi_square < q
 
 
 def independence(dist, alpha):
     dist_list = [dist[i:i + 8] for i in range(0, len(dist), 8)]
     m = len(dist_list)
     n = m / 2
-    chiSquare, s, k = chi2sum(dist_list)
-    chiSquare = (chiSquare - 1) * n
+    chi_square, s, k = chi2sum(dist_list)
+    chi_square = (chi_square - 1) * n
 
     q = scipy.stats.chi2.ppf(1 - alpha, (s - 1) * (k - 1))
 
-    print("empiric: " + str(chiSquare) + ", theoretic: " + str(q))
-    return chiSquare < q
+    print("empiric: " + str(chi_square) + ", theoretic: " + str(q))
+    return chi_square < q
 
 
 def homogeneity(dist, alpha):
@@ -53,37 +54,37 @@ def homogeneity(dist, alpha):
 
     new_dist_list = [dist_list[i:i + m2] for i in range(0, len(dist_list), m2)]
 
-    chiSquare = 0
+    chi_square = 0
     s, k = 0, 0
     for i in range(r):
         sub_list = new_dist_list[i]
-        chiTmp, s, k = chi2sum(sub_list)
-        chiSquare += (chiTmp - 1)
+        chi_tmp, s, k = chi2sum(sub_list)
+        chi_square += (chi_tmp - 1)
 
-    chiSquare *= n
+    chi_square *= n
 
-    q = scipy.stats.chi2.ppf(1 - alpha, (s - 1) * (k - 1)*r)
-    print("empiric: " + str(chiSquare) + ", theoretic: " + str(q))
-    return chiSquare < q
+    q = scipy.stats.chi2.ppf(1 - alpha, (s - 1) * (k - 1) * r)
+    print("empiric: " + str(chi_square) + ", theoretic: " + str(q))
+    return chi_square < q
 
 
 def chi2sum(dist):
-    countMapFirst = {}
-    countMapSecond = {}
-    countMapDouble = {}
+    count_map_first = {}
+    count_map_second = {}
+    count_map_double = {}
 
     for i in range(0, len(dist) - 1, 2):
         item = dist[i]
-        itemNext = dist[(i + 1)]
+        item_next = dist[(i + 1)]
 
-        countMapFirst[item] = countMapFirst.get(item, 0) + 1
-        countMapSecond[itemNext] = countMapSecond.get(itemNext, 0) + 1
-        countMapDouble[(item, itemNext)] = countMapDouble.get((item, itemNext), 0) + 1
+        count_map_first[item] = count_map_first.get(item, 0) + 1
+        count_map_second[item_next] = count_map_second.get(item_next, 0) + 1
+        count_map_double[(item, item_next)] = count_map_double.get((item, item_next), 0) + 1
 
-    chiSquare = 0
+    chi_square = 0
 
-    for double in countMapDouble.keys():
-        item, itemNext = double
-        chiSquare += (countMapDouble[double] ** 2 / (countMapFirst[item] * countMapSecond[itemNext]))
+    for double in count_map_double.keys():
+        item, item_next = double
+        chi_square += (count_map_double[double] ** 2 / (count_map_first[item] * count_map_second[item_next]))
 
-    return chiSquare, len(countMapFirst), len(countMapSecond)
+    return chi_square, len(count_map_first), len(count_map_second)
