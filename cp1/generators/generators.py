@@ -37,7 +37,7 @@ def lehmer_high(N):
 
     result = ''
     for _ in range(N // 8):
-        x_str = bin(x)[2:][:8].zfill(8)
+        x_str = bin(x)[2:].zfill(32)[:8]
         x = (a * x + c) % m
         result += x_str
 
