@@ -55,15 +55,27 @@ def homogeneity(dist, alpha):
 
     new_dist_list = [dist_list[i:i + m2] for i in range(0, len(dist_list), m2)]
 
-    chi_square = 0
-    s, k = 0, 0
+    count_map = {}
+    count_map_2 = {}
     for i in range(r):
         sub_list = new_dist_list[i]
-        chi_tmp, s, k = chi2sum(sub_list)
-        chi_square += (chi_tmp - 1)
+        for k in range(len(sub_list) - 1):
+            item = sub_list[k]
+            # v_ij
+            count_map[(i, item)] = count_map.get((i, item), 0) + 1
+            # v_i
+            count_map_2[item] = count_map_2.get(item, 0) + 1
 
+    s = len(count_map_2)
+    chi_square = 0
+
+    for double in count_map.keys():
+        list_index, item = double
+        chi_square += (count_map[(list_index, item)]**2 / (count_map_2[item] * m2))
+
+    chi_square -= 1
     chi_square *= n
-    q = scipy.stats.chi2.ppf(1 - alpha, (s - 1) * (k - 1) * r)
+    q = scipy.stats.chi2.ppf(1 - alpha, (s - 1) * r)
 
     return chi_square < q, chi_square, q
 
