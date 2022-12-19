@@ -1,25 +1,12 @@
 import random
 from typing import Union
 import primality_testing.primes_to_300000 as pttt
-
-# Знаходження НСД
-def gcd(a: int, b: int) -> int:
-    if a == 0: return b
-    else: return gcd(b % a, a)
-
-# Схема Горнера  
-def horner_pow(a: int, b: int, module: int) -> int:
-    if b == 0: return 1
-    c = a
-    degree = str(bin(b))[2:]
-    for bit in degree[1:]:
-        c = (c ** 2) % module
-        if bit == '1': c = (c * a) % module
-    return c
+import primality_testing.numbers_methods as nm
+import decimal as dec
 
 # Метод пробних ділень (повертає False, якщо число просте)
 def trial_division(n: int, B: int=10) -> Union[int, bool]:
-    sq_n = int(n ** (1 / 2))
+    sq_n = int(dec.Decimal(n) ** dec.Decimal(1 / 2))
     nums = [int(num) for num in str(n)[::-1]]
 
     for prime in pttt.primes:
@@ -46,8 +33,8 @@ def miller_rabin(p: int, k: int=5) -> bool:
         is_strong_pseudoprime = False
         while counter <= k:
             rand_x = random.randint(2, p - 1)
-            if gcd(rand_x, p) == 1: 
-                poss_pseudoprime = horner_pow(rand_x, d, p)
+            if nm.euclid(rand_x, p) == 1: 
+                poss_pseudoprime = nm.horner_pow(rand_x, d, p)
                 if poss_pseudoprime == 1 or poss_pseudoprime == p-1 or poss_pseudoprime == -1:
                     is_strong_pseudoprime = True
                 else: 
