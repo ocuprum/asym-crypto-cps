@@ -34,7 +34,7 @@ def miller_rabin(p: int, k: int=5) -> bool:
         while counter <= k:
             rand_x = random.randint(2, p - 1)
             if nm.euclid(rand_x, p) == 1: 
-                poss_pseudoprime = nm.horner_pow(rand_x, d, p)
+                poss_pseudoprime = pow(rand_x, d, p)
                 if poss_pseudoprime == 1 or poss_pseudoprime == p-1 or poss_pseudoprime == -1:
                     is_strong_pseudoprime = True
                 else: 

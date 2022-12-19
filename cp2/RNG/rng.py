@@ -1,5 +1,4 @@
 import random
-from RNG.LFSR import LFSR
 
 def bbs(N):
     p = int('D5BBB96D30086EC484EBA3D7F9CAEB07', 16)

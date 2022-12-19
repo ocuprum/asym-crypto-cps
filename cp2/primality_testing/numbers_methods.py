@@ -5,16 +5,6 @@ def gcd(a: int, b: int) -> int:
     if a == 0: return b
     else: return gcd(b % a, a)
 
-# Схема Горнера  
-def horner_pow(a: int, b: int, module: int) -> int:
-    if b == 0: return 1
-    c = a
-    degree = str(bin(b))[2:]
-    for bit in degree[1:]:
-        c = (c ** 2) % module
-        if bit == '1': c = (c * a) % module
-    return c
-
 def euclid(a: int, b: int) -> tuple[int, list[int]]:
     if a > b:
         r_prev, r_cur = a, b

@@ -16,6 +16,9 @@ class RSA():
         self.phi = (self.p - 1) * (self.q - 1)
 
         self.e = 0x10001
+        while nm.euclid(self.e, self.phi) != 1:
+            self.e = random.randint(1, self.phi - 1)
+
         self.d = nm.inversed_element(self.e, self.phi)
 
         public_key = (self.n, self.e)
@@ -24,17 +27,17 @@ class RSA():
 
     def encrypt(self, M, public_key):
         n, e = public_key
-        C = nm.horner_pow(M, e, n)
+        C = pow(M, e, n)
 
         return C
 
     def decrypt(self, C):
-        M = nm.horner_pow(C, self.d, self.n)
+        M = pow(C, self.d, self.n)
 
         return M
         
     def sign(self, M):
-        S = nm.horner_pow(M, self.d, self.n)
+        S = pow(M, self.d, self.n)
 
         return (M, S)
 
@@ -42,9 +45,7 @@ class RSA():
         M, S = signature 
         n, e = public_key
 
-        verification = nm.horner_pow(S, e, n)
-        print('k', M)
-        print('verif', verification)
+        verification = pow(S, e, n)
 
         return M == verification
 
