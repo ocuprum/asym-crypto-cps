@@ -3,8 +3,7 @@ import RNG.rng as rng
 import primality_testing.primality_tests as pt
 
 def to_hex(number):
-    f = 4 - len(str(number)) % 4
-    return hex(number).lstrip('0').lstrip('x').upper().zfill(f)
+    return hex(number).lstrip('0').lstrip('x').upper()
 
 # Пошук простого числа
 def find_prime(l=256, interval=False, k=10):
@@ -45,4 +44,4 @@ def find_pair_of_good_primes(l=1024, interval=False):
     while p == q:
         q = find_good_prime(l, interval)
 
-    return (p, q)
+    return p, q

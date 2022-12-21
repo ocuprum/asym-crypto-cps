@@ -5,6 +5,7 @@ while True:
     print('1 - Ввести ServerKey')
     print('2 - Створити нового користувача')
     print('3 - Cтворити новий протокол')
+    print('4 - Створити двох абонентів')
     print('0 - Завершити роботу')
 
     answer = int(input('\nОберіть потрібний варіант: '))
@@ -98,3 +99,63 @@ while True:
                 print('Перевірка підпису: {}'.format(check))
 
             print()
+    
+    elif answer == 4:
+        protocolR = rsa.RSA_protocol(type='receiver')
+        protocolS = rsa.RSA_protocol(public_key=(protocolR.A.n, protocolR.A.e), type='sender')
+        protocolR.n1, protocolR.e1 = protocolS.A.n, protocolS.A.e
+
+        print('A.n <= B.n: {}'.format(protocolS.A.n <= protocolR.A.n))
+        print()
+
+        print('Прості числа')
+        print('------------\n')
+        print('A: p = {}, q = {}'.format(to_hex(protocolS.A.p), to_hex(protocolS.A.q)))
+        print('B: p = {}, q = {}'.format(to_hex(protocolR.A.p), to_hex(protocolR.A.q)))
+        print()
+
+        print('Параметри')
+        print('---------\n')
+        print('A: n = {}, e = {}, d = {}'.format(to_hex(protocolS.A.n), to_hex(protocolS.A.e), to_hex(protocolS.A.d)))
+        print('B: n = {}, e = {}, d = {}'.format(to_hex(protocolR.A.n), to_hex(protocolR.A.e), to_hex(protocolR.A.d)))
+        print()
+
+        plaintext = int(input('Введіть повідомлення: '), 16)
+        while plaintext >= protocolS.A.n or plaintext >= protocolR.A.n:
+            print('Повідомленя більше за n!')
+            plaintext = int(input('Введіть повідомлення: '), 16)
+
+        print('Відкритий текст: {}'.format(to_hex(plaintext)))
+        print('-------------------------------------\n')
+        print('Абонент A:')
+        print('Шифротекст: {}'.format(to_hex(protocolS.A.encrypt(plaintext, (protocolR.A.n, protocolR.A.e)))))
+        print('Підпис: {}'.format(to_hex(protocolS.A.sign(plaintext)[1])))
+        print()
+        print('Абонент B:')
+        print('Шифротекст: {}'.format(to_hex(protocolR.A.encrypt(plaintext, (protocolS.A.n, protocolS.A.n)))))
+        print('Підпис: {}'.format(to_hex(protocolR.A.sign(plaintext)[1])))
+        print('\n')
+
+        print('Протокол розсилання ключів')
+        print('--------------------------\n')
+
+        print('1) A формує повідомлення:')
+        secret_key = int(input('Введіть секретний ключ: '), 16)
+        while secret_key >= protocolS.A.n:
+            print('Повідомленя більше за n!')
+            secret_key = int(input('Введіть секретний ключ: '), 16)
+        print('Секретний ключ: {}'.format(to_hex(secret_key)))
+        k1, S1 = protocolS.send_key(secret_key)
+        print('k1 = {}'.format(to_hex(k1)))
+        print('S1 = {}'.format(to_hex(S1)))
+        print()
+
+        print('2) B знаходить:')
+        k, S, check = protocolR.receive_key((k1, S1))
+        print('k = {}'.format(to_hex(k)))
+        print('S = {}'.format(to_hex(S)))
+        print()
+
+        print('3) B перевіряє підпис A:')
+        print('k = S^e mod n: {}'.format(check))
+        print()

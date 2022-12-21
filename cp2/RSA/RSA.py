@@ -4,7 +4,7 @@ import RSA.RSAfuncs as rsaf
 
 # Побудова криптосистеми
 class RSA():
-    def __init__(self, p=None, q=None, l=64, interval=False) -> None:
+    def __init__(self, p=None, q=None, l=128, interval=False) -> None:
         if p is not None and q is not None:
             self.p, self.q = p, q
         else:
@@ -50,17 +50,18 @@ class RSA():
         return M == verification
 
 class RSA_protocol():
-    def __init__(self, public_key, type) -> None:
+    def __init__(self, public_key=None, type='receiver') -> None:
         self.A = RSA()
 
-        self.n1, self.e1 = public_key
+        if public_key is not None:
+            self.n1, self.e1 = public_key
 
         if type == 'sender':
             while self.A.n > self.n1:
                 self.A = RSA(interval=(2, self.n1 ** 0.5))
                 
 
-        elif type == 'receiver':
+        elif type == 'receiver' and public_key is not None:
             while self.A.n <= self.n1:
                 self.A = RSA(interval=(self.n1, 2 * self.n1))
 
@@ -68,6 +69,7 @@ class RSA_protocol():
         K1 = self.A.encrypt(key, (self.n1, self.e1))
 
         S = self.A.sign(key)[1]
+        print('S = {}'.format(rsaf.to_hex(S)))
         S1 = self.A.encrypt(S, (self.n1, self.e1))
 
         return K1, S1

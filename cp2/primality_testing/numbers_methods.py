@@ -5,6 +5,19 @@ def gcd(a: int, b: int) -> int:
     if a == 0: return b
     else: return gcd(b % a, a)
 
+# Схема Горнера 
+''' 
+def horner_pow(a: int, b: int, module: int) -> int:
+    if b == 0: return 1
+
+    degree = bin(b).lstrip('0').lstrip('b')
+    y = 1
+    for bit in degree:
+        y = (y ** 2) % module
+        y = (y * (a ** int(bit))) % module
+    return y
+'''
+
 def euclid(a: int, b: int) -> tuple[int, list[int]]:
     if a > b:
         r_prev, r_cur = a, b
@@ -36,5 +49,5 @@ def inversed_element(a: int, n: int) -> Union[int, bool]:
         for el in reversed(q):
             u_next = u_prev - el * u_cur
             u_prev, u_cur = u_cur, u_next
-        return u_next
+        return u_next if u_next >= 0 else u_next + n
     return False
