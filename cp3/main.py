@@ -1,6 +1,8 @@
 import Rabin.Rabin as rabin
 import RNG.rng as rng
 from Rabin.RabinFuncs import to_hex
+from primality_testing.primality_tests import miller_rabin
+import ZeroKnowledgeProtocolAttack.ZKPA as zkpa
 
 while True:
     print('1 - Ввести ServerKey')
@@ -71,13 +73,13 @@ while True:
             print()
     
     elif answer == 3:
-        protocolS = rsa.RSA_protocol((server_key_n, server_key_e), type='sender')
-        protocolR = rsa.RSA_protocol((server_key_n, server_key_e), type='receiver')
+        n = int(input('Введіть n: ').lower(), 16)
+        protocolS = zkpa.ZeroKnowledgeProtocolAttack(n)
+        print()
         print('Створено новий протокол')
 
         while True:
-            print('1 - Надіслати ключ')
-            print('2 - Отримати ключ')
+            print('1 - Надіслати Y')
             print('0 - Завершити роботу з цим протоколом')
 
             answer = int(input('\nОберіть потрібний варіант: '))
@@ -87,26 +89,28 @@ while True:
                 break
 
             elif answer == 1:
-                message = int(input('Введіть секретний ключ: ').lower(), 16)
-                while not 0 < message < protocolS.A.n:
-                    print('Введене некоректне значення ключа')
-                    message = int(input('Введіть секретний ключ: ').lower(), 16)
-                K1, S1 = protocolS.send_key(message)
-                print('Зашифрований ключ: {}'.format(to_hex(K1)))
-                print('Підпис користувача: {}'.format(to_hex(S1)))
-                print('Відкритий ключ користувача - n: {}'.format(to_hex(protocolS.A.n)))
-                print('Відкритий ключ користувача - e: {}\n'.format(to_hex(protocolS.A.e)))
+                roots = False
+                i = 1
+                while not roots:
+                    print('Спроба №{}'.format(i))
+                    print('---------')
+                    Y = protocolS.send_random_t_pow_2()
+                    print('Випадкове значення для сервера: {}\n'.format(to_hex(Y)))
+                    root = int(input('Введіть квадратний корінь, отриманий від сервера: ').lower(), 16)
+                    roots = protocolS.attack(root)
+                    if roots is False:
+                        print()
+                        print('[НЕУСПІШНА АТАКА]')
+                        print()
 
-            elif answer == 2:
-                print('Відкритий ключ користувача - n: {}'.format(to_hex(protocolR.A.n)))
-                print('Відкритий ключ користувача - e: {}\n'.format(to_hex(protocolR.A.e)))
-                K1 = int(input('Введіть зашифрований ключ: ').lower(), 16)
-                S1 = int(input('Введіть підпис: ').lower(), 16)
-                print()
-                key, S, check = protocolR.receive_key((K1, S1))
-                print('Зашифрований ключ: {}'.format(to_hex(key)))
-                print('Підпис користувача: {}'.format(to_hex(S)))
-                print('Перевірка підпису: {}'.format(check))
+                    else:
+                        p, q = roots
+                        print()
+                        print('[АТАКА УСПІШНА]')
+                        print('Секретний ключ сервера - p: {}\n'.format(to_hex(p)))
+                        print('Секретний ключ сервера - q: {}\n'.format(to_hex(q)))
+                        print('Перевірка: n = p * q -> {}\n'.format(protocolS.n == p * q))
+                    i += 1
 
             print()
     
