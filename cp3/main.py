@@ -1,14 +1,12 @@
 import Rabin.Rabin as rabin
-import RNG.rng as rng
 from Rabin.RabinFuncs import to_hex
-from primality_testing.primality_tests import miller_rabin
 import ZeroKnowledgeProtocolAttack.ZKPA as zkpa
 
 while True:
     print('1 - Ввести ServerKey')
     print('2 - Створити нового користувача')
     print('3 - Cтворити новий протокол')
-    #print('4 - Створити двох абонентів')
+    print('4 - Створити двох абонентів')
     print('0 - Завершити роботу')
 
     answer = int(input('\nОберіть потрібний варіант: '))
@@ -114,64 +112,42 @@ while True:
 
             print()
     
-    '''
-    elif answer == 4:
-        protocolR = rsa.RSA_protocol(type='receiver')
-        protocolS = rsa.RSA_protocol(public_key=(protocolR.A.n, protocolR.A.e), type='sender')
-        protocolR.n1, protocolR.e1 = protocolS.A.n, protocolS.A.e
 
-        print('A.n <= B.n: {}'.format(protocolS.A.n <= protocolR.A.n))
-        print()
+    elif answer == 4:
+        A = rabin.Rabin()
+        B = rabin.Rabin()
 
         print('Прості числа')
         print('------------\n')
-        print('A: p = {}, q = {}'.format(to_hex(protocolS.A.p), to_hex(protocolS.A.q)))
-        print('B: p = {}, q = {}'.format(to_hex(protocolR.A.p), to_hex(protocolR.A.q)))
+        print('A: p = {}, q = {}'.format(to_hex(A.p), to_hex(A.q)))
+        print('B: p = {}, q = {}'.format(to_hex(B.p), to_hex(B.q)))
         print()
 
         print('Параметри')
         print('---------\n')
-        print('A: n = {}, e = {}, d = {}'.format(to_hex(protocolS.A.n), to_hex(protocolS.A.e), to_hex(protocolS.A.d)))
-        print('B: n = {}, e = {}, d = {}'.format(to_hex(protocolR.A.n), to_hex(protocolR.A.e), to_hex(protocolR.A.d)))
+        print('A: n = {}, b = {}'.format(to_hex(A.n), to_hex(A.b)))
+        print('B: n = {}, b = {}'.format(to_hex(B.n), to_hex(B.b)))
         print()
 
+        #TODO: change from here
         plaintext = int(input('Введіть повідомлення: '), 16)
-        while plaintext >= protocolS.A.n or plaintext >= protocolR.A.n:
+        while plaintext >= A.n or plaintext >= B.n:
             print('Повідомленя більше за n!')
             plaintext = int(input('Введіть повідомлення: '), 16)
 
         print('Відкритий текст: {}'.format(to_hex(plaintext)))
         print('-------------------------------------\n')
         print('Абонент A:')
-        print('Шифротекст: {}'.format(to_hex(protocolS.A.encrypt(plaintext, (protocolR.A.n, protocolR.A.e)))))
-        print('Підпис: {}'.format(to_hex(protocolS.A.sign(plaintext)[1])))
+        ciphertext, c1, c2 = A.encrypt(plaintext, (B.n, B.b))
+        print('Шифротекст: {}'.format(to_hex(ciphertext)))
+        print('c1 = {}'.format(c1))
+        print('c2 = {}'.format(c2))
+        print('Підпис: {}'.format(to_hex(A.sign(plaintext))))
         print()
         print('Абонент B:')
-        print('Шифротекст: {}'.format(to_hex(protocolR.A.encrypt(plaintext, (protocolS.A.n, protocolS.A.n)))))
-        print('Підпис: {}'.format(to_hex(protocolR.A.sign(plaintext)[1])))
+        ciphertext, c1, c2 = B.encrypt(plaintext, (A.n, A.b))
+        print('Шифротекст: {}'.format(to_hex(ciphertext)))
+        print('c1 = {}'.format(c1))
+        print('c2 = {}'.format(c2))
+        print('Підпис: {}'.format(to_hex(B.sign(plaintext))))
         print('\n')
-
-        print('Протокол розсилання ключів')
-        print('--------------------------\n')
-
-        print('1) A формує повідомлення:')
-        secret_key = int(input('Введіть секретний ключ: '), 16)
-        while secret_key >= protocolS.A.n:
-            print('Повідомленя більше за n!')
-            secret_key = int(input('Введіть секретний ключ: '), 16)
-        print('Секретний ключ: {}'.format(to_hex(secret_key)))
-        k1, S1 = protocolS.send_key(secret_key)
-        print('k1 = {}'.format(to_hex(k1)))
-        print('S1 = {}'.format(to_hex(S1)))
-        print()
-
-        print('2) B знаходить:')
-        k, S, check = protocolR.receive_key((k1, S1))
-        print('k = {}'.format(to_hex(k)))
-        print('S = {}'.format(to_hex(S)))
-        print()
-
-        print('3) B перевіряє підпис A:')
-        print('k = S^e mod n: {}'.format(check))
-        print()
-        '''
